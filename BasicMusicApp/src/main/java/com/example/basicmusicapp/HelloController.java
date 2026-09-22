@@ -25,17 +25,24 @@ public class HelloController {
             if (player != null) {
                 player.close();
             }
-            FileInputStream inputStream = new FileInputStream(selectedFile);
-            player = new Player(inputStream);
             Thread thread = new Thread(() -> {
-                try {
+                try (FileInputStream inputStream = new FileInputStream(selectedFile)){
+
+                    player = new Player(inputStream);
                     player.play();
-                    player = null;
-                } catch (JavaLayerException e) {
+                } catch (IOException | JavaLayerException e) {
                     e.printStackTrace();
                 }
             });
             thread.start();
+        }
+    }
+
+    @FXML
+    protected void onStopClick() {
+        if (player != null) {
+            player.close();
+            player = null;
         }
     }
 }

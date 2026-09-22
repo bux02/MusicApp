@@ -13,4 +13,6 @@
 
     <Label fx:id="welcomeText"/>
     <Button text="Choose Music" onAction="#onChooseMusicClick"/>
+
+    <Button text="Stop" onAction="#onStopClick"/>
 </VBox>
